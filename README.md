@@ -88,7 +88,7 @@ $ git branch -D development
 $ git push origin --delete development
 ~~~
 
-## Haciéndo deploy a un servidor FTP desde Bitbucet
+## Haciéndo deploy a un servidor FTP desde Bitbucket
 Para cuestiones de integración continua, es posible hacer un `deploy` de la rama principal cada que esta es actualizada (push) a un servidor FTP, para que de esta manera, el servidor de producción o pruebas siempre esté actualizado. Las variables de entorno deben ser configuradas en las opciones del repositorio. El siguiente código debe ser puesto en la raíz del proyecto en un archivo llamado `bitbucket-pipelines.yml`:
 ~~~yaml
 image: debian
