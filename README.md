@@ -103,7 +103,8 @@ pipelines:
             - git config git-ftp.url ftp://$SERVER/htdocs/
             - git config git-ftp.user $USER
             - git config git-ftp.password $FTP_PASSWORD
-            - git ftp init
+            - git ftp init	# Esto sólo se usa la primara vez para configurar el ftp remoto
+	    # - git ftp push	# después debe ser reemplazado por este comando
 ~~~
 
 Un recurso para aprender a usar *Git* y toda su utilidad es el mismo [libro Git](https://git-scm.com/book/es/v2).
