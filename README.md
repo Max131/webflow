@@ -1,10 +1,38 @@
 # Flujo de trabajo en proyectos Web
 
+## Estructura de proyectos locales
+
+Tener una estructura estándarizada para proyectos locales, ayuda a que se realicen la menor cantidad de cambios posibles (o se anulen) para que cada miembro del equipo pueda trabajar de una manera tal, que no tenga que preocuparse por realizar cambios para adecuar su estrcutura a la de los demás. 
+
+### Servidor local
+
+Una parte fundamental de la estructura y estandarización de proyectos es, tener una misma estructura de URL's para el trabajo en servidores local, una estructura de URL's puede ser la siguiente para que todos los miembros del equipo la cumplan, aunque esto depende de una conciliación entre todos los miembros del mismo. 
+
+~~~
+✔️ http://localhost/nodo/proyecto
+❌ http://localhost/pr/proyecto
+❌ http://localhost/sites/proyect
+❌ http://localhost/proyect
+❌ http://proyect
+~~~
+
+En la medida de lo posible se debería intentar usar el protocolo _**SSL**_, esto debido a que en la actualidad la mayoría de las *URL*'s en Internet usan este protocolo, y muchas veces puede ser problematico el cambiar de un protocolo a otro, una ayuda para crear servidores locales seguros es agregar un certificado autofirmado, [mkcert](https://github.com/FiloSottile/mkcert)puede ayudar en esta tarea. 
+
+### Bases de datos
+
+El uso de base de datos que se propone y que es en su mayoría el común en el desarrollo de softare web es *MySQL/MariaDB*. El uso de esta o cualquier base de datos se debe estandarizar para todos los proyectos, una sugerencia es usar nombres descriptivos y/o alusivos al proyecto:
+
+- Bases de datos tal que: `Cliente/Proyecto`
+- Prefijos de tabla estandarizado a todos los proyectos `Proyecto/Cliente_tabla`
+- Usuario y contraseña estandarizado al proyecto
+
+
 ## Uso de Git
 
 El uso correcto de ramas en git puede ayudar a mejorar el flujo de trabajo, esto se logra cuando cada desarrollador tiene una rama especifica para desarrollar las características que le fueron asignadas, de esta forma cada miembro del proyecto pueden trabajar sin temor a interferir o arruinar el trabajo de los demás, para posteriormente integrar cada rama a la rama principal.
 
-## Ver logs del último commit o cambiarlo
+### Ver logs del último commit o cambiarlo
+
 ~~~bash
 #Ver el último commit agregado
 $ git log -p -1
@@ -14,21 +42,24 @@ $ git add FILES
 $ git commit --amend
 ~~~
 
-## Sacar archivos del área de preparación
+### Sacar archivos del área de preparación
+
 ~~~bash
 $ git reset HEAD FILE
 # o
 $ git restore --staged FILE
 ~~~
 
-## Deshacer cambios a un archivo
+### Deshacer cambios a un archivo
+
 ~~~bash
 $ git checkout -- FILE
 # Deshacer todos los cambios de los archivos trabajados
 $ git checkout .
 ~~~
 
-## Etiquetado de versiones
+### Etiquetado de versiones
+
 ~~~bash
 #Etiqueta anotada, información completa sobre la versión
 #Omitir "-m" para abrir el editor y poder agregar más información
@@ -47,7 +78,8 @@ $ git tag
 $ git show tag
 ~~~
 
-## Envíando etiquetas al servior
+### Envíando etiquetas al servior
+
 Por defecto git no transfiere las etiquetas al hacer un push, hay que hacerlo explicitamente.
 ~~~bash
 #Enviar etiqueta
@@ -56,7 +88,8 @@ $ git push origin v0.0.1
 $ git push origin --tags
 ~~~
 
-## Borrando etiquetas
+### Borrando etiquetas
+
 Por defecto git no borrará las etiquetas en elservidor, por lo que también debe hacerse explicitamente
 ~~~bash
 #Borrar etiqueta local
@@ -65,7 +98,8 @@ $ git tag -d v0.0.1
 $ git push --delete origin v0.0.1
 ~~~
 
-## Ramas
+### Ramas
+
 ~~~bash
 #Agregar nueva rama
 $ git branch development
@@ -75,7 +109,8 @@ $ git checkout development
 $ git checkout -b development
 ~~~
 
-## Borrado de ramas
+### Borrado de ramas
+
 Una rama pude ser borrada cuando se ha terminado de trabajar en ella
 ~~~bash
 #Borrar rama localmente
@@ -89,6 +124,7 @@ $ git push origin --delete development
 ~~~
 
 ## Haciéndo deploy a un servidor FTP desde Bitbucket
+
 Para cuestiones de integración continua, es posible hacer un `deploy` de la rama principal cada que esta es actualizada (push) a un servidor FTP, para que de esta manera, el servidor de producción o pruebas siempre esté actualizado. Las variables de entorno deben ser configuradas en las opciones del repositorio. El siguiente código debe ser puesto en la raíz del proyecto en un archivo llamado `bitbucket-pipelines.yml`:
 ~~~yaml
 image: debian
@@ -104,36 +140,18 @@ pipelines:
             - git config git-ftp.user $USER
             - git config git-ftp.password $FTP_PASSWORD
             - git ftp init	# Esto sólo se usa la primara vez para configurar el ftp remoto
-	    # - git ftp push	# después debe ser reemplazado por este comando
+	    		  - git ftp push	# después debe ser reemplazado por este comando
 ~~~
 
 Un recurso para aprender a usar *Git* y toda su utilidad es el mismo [libro Git](https://git-scm.com/book/es/v2).
 
-## Estructura de proyectos locales
+## Buenas prácticas 
 
-Tener una estructura estándarizada para proyectos locales, ayuda a que se realicen la menor cantidad de cambios posibles (o se anulen) para que cada miembro del equipo pueda trabajar de una manera tal, que no tenga que preocuparse por realizar cambios para adecuar la estrcutura nuevamente al subir su rama del proyecto. 
+El uso de buenas prácticas en los proyectos de desarrollo web, nos ayudan enormemente a tener bien estructurado el código, con lo cual ayuda a la legibilidad del mismo, a la rápidez para identificar que hace cada línea, así como para depurar de una manera más eficaz. 
 
-Esto podría lograrse, por ejemplo, estandarizando url's de trabajo.
+### CSS
 
-~~~
-✔️ http://localhost/nodo/proyecto
-❌ http://localhost/pr/proyecto
-❌ http://localhost/sites/proyect
-❌ http://localhost/proyect
-❌ http://proyect
-~~~
-
-En la medida de lo posible se debería intentar usar el protocolo ***SSL* **, esto debido a que en la actualidad la mayoría de las *URL*'s en Internet usan este protocolo, y muchas veces puede ser problematico el cambiar de un protocolo a otro, una ayuda para crear servidores locales seguros es agregar un certificado autofirmado, [mkcert](https://github.com/FiloSottile/mkcert)puede ayudar en esta tarea. 
-
-## Bases de datos
-
-El uso de base de datos que se propone y que es en su mayoría el común en el desarrollo de softare web es *MySQL/MariaDB*. El uso de esta o cualquier base de datos se debe estandarizar para todos los proyectos, una sugerencia es usar nombres descriptivos y/o alusivos al proyecto:
-
-- Bases de datos tal que: `Cliente/Proyecto`
-- Prefijos de tabla estandarizado a todos los proyectos `Proyecto/Cliente_tabla`
-- Usuario y contraseña estandarizado al proyecto
-
-## CSS
+CSS tiene diversos métodos de estructuración (OOCSS, ITCSS, BEM), aunque el más popular es BEM, que es el que se propone como método de trabajo.
 
 Uso de estructuración mediante *BEM* (Bloque, Elemento, Modificador) y buenas prácticas para el código CSS.
 
@@ -179,13 +197,18 @@ Hay que recordar que la metodología *BEM* desaconseja sub elementos, por lo tan
 
 
 
-## Javascript
+### Javascript
 
-Guía de [estilos para Javascript](https://github.com/paolocarrasco/javascript-style-guide) de Airbnb
+La codificación en Javascript se puede llevar a cabo de diversas maneras, hay muchos métodos de buenas prácticas y estructuración, la que se propone en este caso, es una de las más famosas y conocidas en el desarrollo web, que es la [guía de estilos para Javascript](https://github.com/paolocarrasco/javascript-style-guide)  de _Airbnb_.
+
+
+### React
+
+En el caso de uso de React para desarrollo web, _Airbnb_ también posee una [ guía de estilos para React/JSX](https://github.com/agrcrobles/javascript/tree/master/react).
 
 ### Documentación de funciones
 
-Es muy importante el poder documentar las funciones y/o métodos usados en Javascript, esto con la finalidad de no solamente tener claro que hace cada cosa, sino también para recordar en caso de que se deje el código durante mucho tiempo o si se integra un nuevo miembro al equipo. 
+Es muy importante el poder documentar las funciones y/o métodos usados en Javascript, React o cualquier lenguaje de programación, esto con la finalidad de no solamente tener claro que hace cada cosa, sino también para recordar en caso de que se deje el código durante mucho tiempo o si se integra un nuevo miembro al equipo, saber el funcionamiento de cada función, método o clase. 
 
 Hay un estandar común para la documentación el cual es el siguiente:
 
@@ -205,7 +228,4 @@ function sayHello(name, age) {
 
 
 
-## React
-
-Guía de [estilos para React/JSX](https://github.com/agrcrobles/javascript/tree/master/react) de Airbnb
 
