@@ -123,6 +123,8 @@ $ git branch -D development
 $ git push origin --delete development
 ~~~
 
+**Nota**: Un recurso para aprender a usar *Git* y toda su utilidad es el mismo [libro Git](https://git-scm.com/book/es/v2).
+
 ## Haciéndo deploy a un servidor FTP desde Bitbucket
 
 Para cuestiones de integración continua, es posible hacer un `deploy` de la rama principal cada que esta es actualizada (push) a un servidor FTP, para que de esta manera, el servidor de producción o pruebas siempre esté actualizado. Las variables de entorno deben ser configuradas en las opciones del repositorio. El siguiente código debe ser puesto en la raíz del proyecto en un archivo llamado `bitbucket-pipelines.yml`:
@@ -140,10 +142,8 @@ pipelines:
             - git config git-ftp.user $USER
             - git config git-ftp.password $FTP_PASSWORD
             - git ftp init	# Esto sólo se usa la primara vez para configurar el ftp remoto
-	    		  - git ftp push	# después debe ser reemplazado por este comando
+	    - git ftp push	# después debe ser reemplazado por este comando
 ~~~
-
-Un recurso para aprender a usar *Git* y toda su utilidad es el mismo [libro Git](https://git-scm.com/book/es/v2).
 
 ## Buenas prácticas 
 
