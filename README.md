@@ -178,7 +178,7 @@ Para cuestiones de integración continua, es posible hacer un `deploy` de la ram
 image: debian
 pipelines:
   branches:
-    main:
+    master:
       - step:
           name: Deploy
           deployment: production
