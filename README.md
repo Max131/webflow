@@ -9,14 +9,14 @@ Tener una estructura estándarizada para proyectos locales, ayuda a que se reali
 Una parte fundamental de la estructura y estandarización de proyectos es, tener una misma estructura de URL's para el trabajo en servidores local, una estructura de URL's puede ser la siguiente para que todos los miembros del equipo la cumplan, aunque esto depende de una conciliación entre todos los miembros del mismo. 
 
 ~~~
-✔️ http://localhost/nodo/proyecto
-❌ http://localhost/pr/proyecto
-❌ http://localhost/sites/proyect
-❌ http://localhost/proyect
-❌ http://proyect
+✔️ http://localhost/nodo/project
+❌ http://localhost/pr/project
+❌ http://localhost/sites/project
+❌ http://localhost/project
+❌ http://project
 ~~~
 
-En la medida de lo posible se debería intentar usar el protocolo _**SSL**_, esto debido a que en la actualidad la mayoría de las *URL*'s en Internet usan este protocolo, y muchas veces puede ser problematico el cambiar de un protocolo a otro, una ayuda para crear servidores locales seguros es agregar un certificado autofirmado, [mkcert](https://github.com/FiloSottile/mkcert)puede ayudar en esta tarea. 
+En la medida de lo posible se debería intentar usar el protocolo _**SSL**_, esto debido a que en la actualidad la mayoría de las *URL*'s en Internet usan este protocolo, y muchas veces puede ser problematico el cambiar de un protocolo a otro, una ayuda para crear servidores locales seguros es agregar un certificado autofirmado, [mkcert](https://github.com/FiloSottile/mkcert) puede ayudar en esta tarea. 
 
 ### Bases de datos
 
@@ -29,12 +29,57 @@ El uso de base de datos que se propone y que es en su mayoría el común en el d
 
 ## Uso de Git
 
-El uso correcto de ramas en git puede ayudar a mejorar el flujo de trabajo, esto se logra cuando cada desarrollador tiene una rama especifica para desarrollar las características que le fueron asignadas, de esta forma cada miembro del proyecto pueden trabajar sin temor a interferir o arruinar el trabajo de los demás, para posteriormente integrar cada rama a la rama principal.
+El uso correcto de ramas en git puede ayudar a mejorar el flujo de trabajo, esto se logra cuando cada desarrollador tiene una rama especifica para desarrollar las características que le fueron asignadas, de esta forma cada miembro del proyecto pueden trabajar sin temor a interferir o arruinar el trabajo de los demás, para posteriormente integrar cada rama a la rama principal. Un recurso para aprender a usar _Git_ (y en el que se basa esta sección) y todas sus posibilidades es el [libro Git](https://git-scm.com/book/es/v2).
+
+Para trabajar en _GIT_, se hace principalmente desde la consola del sistema operativo, aunque también existen diversos [clientes gráficos](https://git-scm.com/downloads/guis)
+
+
+### Iniciar un repositiorio
+La forma más sencilla de comenzar a trabajar con _GIT_ es, crear un directorio nuevo y dentro de el inicializarlo de la siguiente manera:
+~~~bash
+$ mkdir project
+$ cd project
+$ git init
+~~~
+
+### Ver los archivos modificados
+Cuando comenzámos a trabajar con _GIT_, es posible poder ver los archivos que han sido modificacos, agregados o eliminados
+~~~bash
+$ git status
+~~~
+
+### Ver cambios en los archivos
+Al estar trabajando, es posible poder ver los cambios que hemos realizados en un archivo, tanto como lo que se ha agregado como eliminado
+~~~bash
+$ git diff
+~~~
+
+### Agregar archivos al área de preparación
+~~~bash
+$ git add FILE
+#Agrega todos los archivos modificados
+$ git add .
+~~~
+
+### Confirmar los archivos agregados
+Después de agregar archivos al área de _"stage"_ (preparación), uno de los siguientes pasos fundamentales es confirmar los cambios.
+~~~bash
+#Esto confirmará los cambios y abrirá el editor predeterminado
+#para escribir un mensaje o descripción acerca de los cambios realizados
+$ git commit 
+
+#Podemos confirmar los cambios y escribir un mensaje en la misma lína
+$ git commit -m "Cambios realizados"
+
+#Si ya hemos agregado anteriormente los archivos trabajados al área de preparación
+#podemos ejecutar el siguiente comando para no tener agregarlos en cada modificación
+$ git commit -a -m "Cambios realizados"
+~~~
 
 ### Ver logs del último commit o cambiarlo
-
 ~~~bash
-#Ver el último commit agregado
+#Ver el último commit agregado y sus cambios
+#podemos cambiar -1 por el número de commits que deseemos ver
 $ git log -p -1
 
 #Agregar archivos/cambios o cambiar el mensaje del último commit
@@ -43,7 +88,6 @@ $ git commit --amend
 ~~~
 
 ### Sacar archivos del área de preparación
-
 ~~~bash
 $ git reset HEAD FILE
 # o
@@ -51,7 +95,6 @@ $ git restore --staged FILE
 ~~~
 
 ### Deshacer cambios a un archivo
-
 ~~~bash
 $ git checkout -- FILE
 # Deshacer todos los cambios de los archivos trabajados
@@ -59,7 +102,6 @@ $ git checkout .
 ~~~
 
 ### Etiquetado de versiones
-
 ~~~bash
 #Etiqueta anotada, información completa sobre la versión
 #Omitir "-m" para abrir el editor y poder agregar más información
@@ -78,8 +120,7 @@ $ git tag
 $ git show tag
 ~~~
 
-### Envíando etiquetas al servior
-
+### Envíando etiquetas al servidor
 Por defecto git no transfiere las etiquetas al hacer un push, hay que hacerlo explicitamente.
 ~~~bash
 #Enviar etiqueta
@@ -89,7 +130,6 @@ $ git push origin --tags
 ~~~
 
 ### Borrando etiquetas
-
 Por defecto git no borrará las etiquetas en elservidor, por lo que también debe hacerse explicitamente
 ~~~bash
 #Borrar etiqueta local
@@ -99,7 +139,7 @@ $ git push --delete origin v0.0.1
 ~~~
 
 ### Ramas
-
+Las ramas en _GIT_ nos dan la oportunidad de poder trabajar con una "copia" del repositorio sin tener que modificar el origanl
 ~~~bash
 #Agregar nueva rama
 $ git branch development
@@ -109,8 +149,16 @@ $ git checkout development
 $ git checkout -b development
 ~~~
 
-### Borrado de ramas
+### Agregar una nueva rama al servidor remoto
+Si deseamos trabajar con una rama que hayamos creado en otra computadora, esto es posible si la subimos al servidor de origen
+~~~bash
+#Cambiamos a la rama "development"
+$ git checkout development
+#Subimos la rama actual al servidor
+$ git push origin development
+~~~
 
+### Borrado de ramas
 Una rama pude ser borrada cuando se ha terminado de trabajar en ella
 ~~~bash
 #Borrar rama localmente
@@ -122,8 +170,6 @@ $ git branch -D development
 #Borrar rama remotamente
 $ git push origin --delete development
 ~~~
-
-**Nota**: Un recurso para aprender a usar *Git* y toda su utilidad es el mismo [libro Git](https://git-scm.com/book/es/v2).
 
 ## Haciéndo deploy a un servidor FTP desde Bitbucket
 
