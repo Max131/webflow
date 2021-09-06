@@ -132,19 +132,17 @@ Para cuestiones de integración continua, es posible hacer un `deploy` de la ram
 image: debian
 pipelines:
   branches:
-    master:
-     - step:
-         script:
-           - apt-get update
+    main:
+      - step:
+          name: Deploy
+          deployment: production
+          script:
             - apt-get -qq install git-ftp
             - git config git-ftp.url ftp://$SERVER/htdocs/
             - git config git-ftp.user $USER
             - git config git-ftp.password $FTP_PASSWORD
-            - git ftp init
-	    - git ftp push
-	    
-# git ftp init sólo debe usarse la primera vez que se ejecute el deploy	   
-# git ftp push debe ser usado después del primer deploy  	    
+            - git ftp push          	    
+# La primera vez que se ejecute el deploy debe usarse "git ftp init" en lugar de "git ftp push"
 ~~~
 
 ## Buenas prácticas 
