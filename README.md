@@ -9,7 +9,7 @@ Tener una estructura estándarizada para proyectos locales, ayuda a que se reali
 Una parte fundamental de la estructura y estandarización de proyectos es, tener una misma estructura de URL's para el trabajo en servidores local, una estructura de URL's puede ser la siguiente para que todos los miembros del equipo la cumplan, aunque esto depende de una conciliación entre todos los miembros del mismo. 
 
 ~~~
-✔️ http://localhost/nodo/project
+✔️ http://localhost/agencia/project
 ❌ http://localhost/pr/project
 ❌ http://localhost/sites/project
 ❌ http://localhost/project
@@ -194,6 +194,26 @@ pipelines:
 ## Buenas prácticas 
 
 El uso de buenas prácticas en los proyectos de desarrollo web, nos ayudan enormemente a tener bien estructurado el código, con lo cual ayuda a la legibilidad del mismo, a la rápidez para identificar que hace cada línea, así como para depurar de una manera más eficaz. 
+
+### HTML
+
+_HTML_ es el corazón de la web, no es solamente sobre lo cual estructuramos páginas y sitios de Internet, sino que últimamente ha cobrado mucha importancia con su última actualización (_HTML5_), la cual hace énfasis en la estructura semántica, la cual contribuye ampliamente a la accesibilidad para lectores de pantalla y al indexado en motores de búsqueda. Es por todo esto que se recomienda la siguiente guia de estilos.
+
+### Identación y escritura del código
+En general, y no solamente para _HTML_, debería usarse una identación de dos espacios, no combinandose estos en un tabulador, esto para que sea más sencillo manejar el código. Tampoco debería mezclarse tabuladores con espacios. En HTML todas las etiquetas y atributos deben escribirse en minúscilas, aunque es permitido el uso de mayúsculas, esto es descanosejado. 
+
+#### Declaración de tipo de dcumento y header.
+
+Usar estos aspectos es de suma importancia, ya que mediante estos declaramos el tipo de documento que usarémos y los metadatos y utilidades a usar. Aunque el uso de "header" puede ser omitido, esto es desaconsejado. La etiqueta "title", que da título a los ducmentos _HTML_, es obligatoria
+~~~html
+<!doctype html> <!--declaración del tipo-->
+<header> <!--declaración del header-->
+	<title>Título del documento</title>
+</header>
+~~~
+
+#### Declaración de la codificación de caracteres y responsividad
+
 
 ### CSS
 
