@@ -140,8 +140,11 @@ pipelines:
             - git config git-ftp.url ftp://$SERVER/htdocs/
             - git config git-ftp.user $USER
             - git config git-ftp.password $FTP_PASSWORD
-            - git ftp init #usar sólo en el primer deploy
-	    - git ftp push #usar después del primer deploy
+            - git ftp init
+	    - git ftp push
+	    
+# git ftp init sólo debe usarse la primera vez que se ejecute el deploy	   
+# git ftp push debe ser usado después del primer deploy  	    
 ~~~
 
 ## Buenas prácticas 
