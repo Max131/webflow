@@ -82,6 +82,12 @@ $ git commit -a -m "Cambios realizados"
 #podemos cambiar -1 por el número de commits que deseemos ver
 $ git log -p -1
 
+#Ver descripciones de los cambios en los commits
+$ git log --oneline
+
+#Ver los cambios al código utilizando el número de commit
+$ git show NumeroCommit
+
 #Agregar archivos/cambios o cambiar el mensaje del último commit
 $ git add FILES
 $ git commit --amend
