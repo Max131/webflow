@@ -33,7 +33,7 @@ El uso correcto de ramas en git puede ayudar a mejorar el flujo de trabajo, esto
 
 Para trabajar en _GIT_, se hace principalmente desde la consola del sistema operativo, aunque también existen diversos [clientes gráficos](https://git-scm.com/downloads/guis)
 
-### Ignorar archivos
+### Ignorar y borrar archivos
 Uno de los aspectos más importantes al iniciar un proyecto en _GIT_, es definir que archivos y directorios serán ignorados en el proyecto al generar cambios, por lo regular serán archivos o directorios temporales, cache, archivos locales innecesarios para el proyecto, etc. También se puede dar el caso en que tengamos archivos o directorios que sean necesarios para el funcionamiento del proyecto, pero que, cada desarrollador manentan una copia con modificaciones propias (como configuraciones, htaccess, archivos config, etc), tambien para esto existe una solución sin que los cambios se vean reflejados en la rama de trabajo o principal. 
 
 #### Ignorar archivos en general
@@ -57,6 +57,20 @@ $ git update-index --assume-unchanged .htaccess
 #Para readmitir los cambios en el archivo
 $ git update-index --noassume-unchanged .htaccess
 ~~~
+
+#### Borrar archivos sin seguimiento
+Parte del desarollo es probar funcionalidades, por lo que en ocasiones agregamos archivos de prueba que posteriormente queremos borrar, esto lo podemos lograr en _GIT_ de manera sencilla.
+~~~bash
+#Borrar archivos y directorios
+$ git clean -fd
+#Borrar también archivos ignorados
+$ git clean-fdx
+#Modo interactivo
+$ git clean -fdxi
+#Vista previa, no borrara nada
+$ git clean -fdxn
+~~~
+
 
 ### Iniciar un repositiorio
 La forma más sencilla de comenzar a trabajar con _GIT_ es, crear un directorio nuevo y dentro de el inicializarlo de la siguiente manera:
