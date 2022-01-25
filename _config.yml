@@ -8,5 +8,5 @@ defaults:
   - scope:
       path: ""
     values:
-      image: https://picsum.photos/640/320
+      image: https://picsum.photos/id/20/640/320
 author: "Mario Abreu"
